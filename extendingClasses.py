@@ -1,12 +1,17 @@
 import SSHLogEntry
 
+
+INCORR_PASSWD = 'Incorrect password'
+CORR_PASSWD = 'Successful login'
+ERR = 'Error'
+
 class passwdDenied(SSHLogEntry):
 
     def __init__(self):
         super().__init__()
 
     def validate(self):
-        return self.info['message-type'] == 'Incorrect password'
+        return self.info['message-type'] == INCORR_PASSWD
 
 
 class passwdAccepted(SSHLogEntry):
@@ -15,7 +20,7 @@ class passwdAccepted(SSHLogEntry):
         super().__init__()
 
     def validate(self):
-        return self.info['message-type'] == 'Successful login'
+        return self.info['message-type'] == CORR_PASSWD
 
 
 class error(SSHLogEntry):
@@ -24,7 +29,7 @@ class error(SSHLogEntry):
         super().__init__()
 
     def validate(self):
-        return self.info['message-type'] == 'Error'
+        return self.info['message-type'] == ERR
 
 
 class otherInfo(SSHLogEntry):
